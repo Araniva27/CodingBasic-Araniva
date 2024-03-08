@@ -1,5 +1,5 @@
-
 using CodingBasicAPI.Data;
+using CodingBasicAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingBasicAPI.Services;

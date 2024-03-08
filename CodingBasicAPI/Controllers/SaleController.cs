@@ -1,4 +1,5 @@
 using CodingBasicAPI.Services;
+using CodingBasicAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodingBasicAPI.Controller;
