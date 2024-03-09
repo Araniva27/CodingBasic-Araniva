@@ -20,6 +20,15 @@ builder.Services.AddScoped<PersonService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<SaleService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +46,8 @@ app.MapControllers();
 
 // Enables authorization middleware to handle access control based on policies
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapGet("/", () => @"Hello World");
 app.Run();

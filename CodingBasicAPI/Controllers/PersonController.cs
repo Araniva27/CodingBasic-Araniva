@@ -44,7 +44,7 @@ public class PersonController : ControllerBase
     /// it logs the error to the console and returns a `BadRequest` response with an error message.
     /// </returns>
     [HttpGet("{name}")]
-    public async Task<ActionResult<List<Person>>> GetPersonByName(string name)
+    public async Task<ActionResult<List<EmployeeData>>> GetPersonByName(string name)
     {         
         try{
             var people = await _service.GetPersonByName(name);
@@ -59,17 +59,15 @@ public class PersonController : ControllerBase
     /// Retrieves a paginated list of people by person type using a GET request, with exception handling.
     /// </summary>
     /// <param name="personType">Specifies the person type for filtering.</param>
-    /// <param name="pageNumber">Specifies the page number for result retrieval.</param>
-    /// <param name="pageSize">Specifies the number of items per page in the results.</param>
     /// <returns>
     /// ActionResult<List<Person>>. Returns a paginated list of people on success, and handles exceptions by
     /// logging errors to the console and returning a BadRequest result with an error message.
     /// </returns>
     [HttpGet("personType/{personType}")]
-    public async Task<ActionResult<List<Person>>> GetPersonByPersonType(string personType,int pageNumber, int pageSize)
+    public async Task<ActionResult<List<EmployeeData>>> GetPersonByPersonType(string personType)
     {           
         try{
-            var people = await _service.GetPersonByPersonType(personType, pageNumber, pageSize); 
+            var people = await _service.GetPersonByPersonType(personType); 
             return Ok(people);
         }catch(Exception ex){
             Console.WriteLine($"Error: {ex.Message}");
@@ -87,10 +85,10 @@ public class PersonController : ControllerBase
     /// logging errors to the console and returning a BadRequest result with an error message.
     /// </returns>
     [HttpGet("personByNameAndPersonType")]
-    public async Task<ActionResult<List<Person>>> GetPersonByPersonType(string name, string personType)
+    public async Task<ActionResult<List<EmployeeData>>> GetPersonByPersonType(string name, string personType)
     {              
         try{
-            var people = await _service.GetPersonByNameAndPersonType(name, personType);
+            var people = await _service.GetPersonByNameAndType(name, personType);
             return Ok(people);
         }catch(Exception ex){
             Console.WriteLine($"Error: {ex.Message}");
